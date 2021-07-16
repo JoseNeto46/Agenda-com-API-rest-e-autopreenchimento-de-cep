@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Grupos{% endblock %}
+
+{% block content %}
+  <h1>Grupos</h1>
+  <hr>
+  <div class="h-100 p-5 bg-light border rounded-3">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4">
+      {% for grupo in grupos %}
+      <div class="col">
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">{{ grupo.nome }}</h5>
+            {% if grupo.descricao %}
+              <h6 class="card-subtitle mb-2 text muted">{{ grupo.descricao }}</h6>
+            {% else %}
+              <h6 class="card-subtitle mb-2 text muted">Grupo de contatos</h6>
+            {% endif %}
+            <a class='btn btn-primary' href="{% url 'editar_grupo' grupo.id %}">Editar</a>
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal{{ grupo.id }}">
+              Excluir
+            </button>
+            <!-- Modal -->
+            <div class="modal fade" id="modal{{ grupo.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{ grupo.nome }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    Tem certeza de que deseja excluir o grupo <b>{{ grupo.nome }}</b>?
+                  </div>
+                  <div class="modal-footer">
+                    <a class='btn btn-danger' href="{% url 'excluir_grupo' grupo.id %}">Excluir</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

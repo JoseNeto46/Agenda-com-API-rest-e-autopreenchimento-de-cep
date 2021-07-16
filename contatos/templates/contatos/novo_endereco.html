@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Novo email para {{ contato.nome }}{% endblock %}
+
+{% block content %}
+  <div class="h-100 p-5 bg-light border rounded-3">
+    <h1>Novo endereco para {{ contato.nome }}</h1>
+    <form method="post">
+      {% csrf_token %}
+      {{ form|crispy }}
+      <br>
+      <input class="btn btn-success" type="submit" value="Salvar">
+    </form>
+  </div>
+{% endblock %}
+{% block script %}
+    <script>
+
+    const $campoCep = document.querySelector('[name="cep"]');
+    const $campoRua = document.querySelector('[name="rua"]');
+    const $campoBairro = document.querySelector('[name="bairro"]');
+    const $campoCidade = document.querySelector('[name="cidade"]');
+    const $campoEstado = document.querySelector('[name="estado"]');
+
+
+    $campoCep.addEventListener("blur", infoEvento => {
+      const cep = infoEvento.target.value;
+      fetch(`https://viacep.com.br/ws/${cep}/json/`)
+        .then((respostaDoServer) =>{
+            return respostaDoServer.json();
+        })
+        .then((dadosDoCep) =>{
+            console.log(dadosDoCep);
+            $campoRua.value = dadosDoCep.logradouro;
+            $campoBairro.value = dadosDoCep.bairro;
+            $campoCidade.value = dadosDoCep.localidade;
+            $campoEstado.value = dadosDoCep.uf;
+
+        })
+    });
+    </script>
+{% endblock %}

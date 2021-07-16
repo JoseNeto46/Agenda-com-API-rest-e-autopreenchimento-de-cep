@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Novo Grupo{% endblock %}
+
+{% block content %}
+  <div class="h-100 p-5 bg-light border rounded-3">
+    <h1>Novo Grupo</h1>
+    <form method="post">
+      {% csrf_token %}
+      {{ form|crispy }}
+      <br>
+      <input class="btn btn-success" type="submit" value="Salvar">
+    </form>
+  </div>
+
+{% endblock %}
