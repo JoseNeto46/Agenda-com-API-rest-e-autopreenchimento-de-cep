@@ -11,14 +11,14 @@
     <title>{% block title %}{% endblock %}</title>
   </head>
   <body style="padding-top:70px">
-    <nav class="navbar fixed-top navbar-dark bg-primary">
+    <nav class="navbar fixed-top navbar-dark bg-dark">
       <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'contatos_list_view' %}">Agenda</a>
         <div class="navbar-nav" id="navbarSupportedContent">
           <form action="{% url 'contatos_list_view' %}" class="d-flex" method="post">
             {% csrf_token %}
-            <input class="form-control me-2" type="search" placeholder="Contato">
-            <button class="btn btn-outline-dark" type="submit">Buscar</button>
+            <input class="form-control me-2" name="busca" type="search" placeholder="Contato">
+            <button class="btn btn-outline-light" type="submit">Buscar</button>
           </form>
         </div>
       </div>

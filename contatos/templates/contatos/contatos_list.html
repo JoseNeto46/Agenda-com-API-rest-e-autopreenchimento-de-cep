@@ -48,11 +48,6 @@
                 <li class="list-group-item">Email {{ forloop.counter }}: {{ email.endereco_email }}</li>
               {% endfor %}
             </ul>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item"><h6 class="card-title">Endereço:</h6></li>
-              {% for email in contato.endereço_set.all %}
-                <li class="list-group-item">Endereço {{ forloop.counter }}: {{ email.endereco }}</li>
-              {% endfor %}
             </ul>
             <a class='btn btn-primary' href="{% url 'editar_contato' contato.id %}">Editar</a>
           </div>
